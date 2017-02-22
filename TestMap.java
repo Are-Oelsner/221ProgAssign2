@@ -140,13 +140,20 @@ public class TestMap {
       map.put(3, "C");
       map.put(4, "D");
       //Execute
-      Iterable<TestEntry<Integer, String>> iter = map.entrySet();
-      Iterator<TestEntry<Integer, String>> iterator = iter.iterator();
+      ArrayList<TestEntry<Integer,String>> entries = new ArrayList();
+      entries.add(new TestEntry(1, "A"));
+      entries.add(new TestEntry(2, "B"));
+      entries.add(new TestEntry(3, "C"));
+      entries.add(new TestEntry(4, "D"));
+
+      Iterable<Entry<Integer,String>> entry = map.entrySet();
 
       //Test
-      for(int i=1; i<=4; i++) {  //is this legal?
-        if(!iterator.next().getValue().equals(map.get(i)))
+      int i=0;
+      for(Entry x : entry) {  //is this legal?
+        if(!entries.contains(x))
           return false;
+        i++;
       }
       return true;  
 
