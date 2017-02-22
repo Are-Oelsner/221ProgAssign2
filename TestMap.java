@@ -18,13 +18,12 @@ public class TestMap {
    */
   public static <M extends Map<Integer, String>>
     boolean TestGet(Supplier<M> c) {
-      //TODO write unit test for get
       //Setup
       Map<Integer, String> map = c.get();  //what does this mean
 
       map.put(1, "A");
       map.put(2, "B");
-      
+
       //Execute
       String x = map.get(2);
 
@@ -42,13 +41,12 @@ public class TestMap {
    */
   public static <M extends Map<Integer, String>>
     boolean TestPut(Supplier<M> c) {
-      //TODO write unit test for put
       //Setup
       Map<Integer, String> map = c.get();  //what does this mean
 
       map.put(1, "A");
       map.put(2, "B");
-      
+
       //Execute
       String x = map.get(2);
 
@@ -65,13 +63,12 @@ public class TestMap {
    */
   public static <M extends Map<Integer, String>>
     boolean TestRemove(Supplier<M> c) {
-      //TODO write unit test for remove
       //Setup
       Map<Integer, String> map = c.get();  //what does this mean
 
       map.put(1, "A");
       map.put(2, "B");
-      
+
       //Execute
       String x = map.remove(2);
 
@@ -131,7 +128,6 @@ public class TestMap {
    */
   public static <M extends Map<Integer, String>>
     boolean TestEntrySet(Supplier<M> c) {
-      //TODO write unit test for remove
       //Setup
       Map<Integer, String> map = c.get();
 
@@ -155,7 +151,7 @@ public class TestMap {
           return false;
         i++;
       }
-      return true;  
+      return true;
 
       //Empty teardown
     }
