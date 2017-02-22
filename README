@@ -1,0 +1,29 @@
+//Name: Are Oelsner
+
+Can copy implementation from Textbook
+Start with unit tests and then sorted table then TreeMap then ProbeHashMap
+Implement:
+  ProbeHashMap
+  SortedTableMap
+  TreeMap
+
+Testing: 
+  TestMap
+  Implement tests for Map ADT, test should be generic so will work for all of
+  the classes. The Supplier on line 16 is javas way of creating a new for
+  generics
+
+Jory Implemented:
+  ChainHashMap
+  UnsortedTableMap
+
+
+For comparators and findIndex functions make sure that when comparing things use
+.equals instead of ==
+
+Textbook: Chapter 10: Maps, Hash Tables, and Skip Lists -- 401
+  10.1 Maps -- 402
+  10.2 Hash Tables -- 410
+  10.3 Sorted Maps -- 428
+  10.4 Skip Lists -- 436
+  10.5 Sets, Multisets, and Multimaps -- 445
