@@ -1,6 +1,8 @@
 //Names: Are Oelsner, Paul Torre
 //Testing code for map implementations
 import java.util.ArrayList;
+
+import java.util.Iterator;
 import java.util.function.Supplier;
 
 /**
@@ -18,11 +20,18 @@ public class TestMap {
     boolean TestGet(Supplier<M> c) {
       //TODO write unit test for get
       //Setup
-      Map<Integer, String> map = c.get();
+      Map<Integer, String> map = c.get();  //what does this mean
+
+      map.put(1, "A");
+      map.put(2, "B");
+      
       //Execute
+      String x = map.get(2);
+
       //Test
-      return false;
+      return x.equals("B");
       //Empty teardown
+
     }
 
   /**
@@ -35,15 +44,21 @@ public class TestMap {
     boolean TestPut(Supplier<M> c) {
       //TODO write unit test for put
       //Setup
-      Map<Integer, String> map = c.get();
+      Map<Integer, String> map = c.get();  //what does this mean
+
+      map.put(1, "A");
+      map.put(2, "B");
+      
       //Execute
+      String x = map.get(2);
+
       //Test
-      return false;
+      return x.equals("B") && map.size() == 2;
       //Empty teardown
     }
 
   /**
-   * Test get method of arbitrary map
+   * Test remove method of arbitrary map
    * @param c Supplier to create a map of specific type
    * @param <M> Specific map structure
    * @return Result of unit test
@@ -52,10 +67,16 @@ public class TestMap {
     boolean TestRemove(Supplier<M> c) {
       //TODO write unit test for remove
       //Setup
-      Map<Integer, String> map = c.get();
+      Map<Integer, String> map = c.get();  //what does this mean
+
+      map.put(1, "A");
+      map.put(2, "B");
+      
       //Execute
+      String x = map.remove(2);
+
       //Test
-      return false;
+      return x.equals("B") && map.size() == 1;
       //Empty teardown
     }
 
@@ -113,9 +134,22 @@ public class TestMap {
       //TODO write unit test for remove
       //Setup
       Map<Integer, String> map = c.get();
+
+      map.put(1, "A");
+      map.put(2, "B");
+      map.put(3, "C");
+      map.put(4, "D");
       //Execute
+      Iterable<TestEntry<Integer, String>> iter = map.entrySet();
+      Iterator<TestEntry<Integer, String>> iterator = iter.iterator();
+
       //Test
-      return false;
+      for(int i=1; i<=4; i++) {  //is this legal?
+        if(!iterator.next().getValue().equals(map.get(i)))
+          return false;
+      }
+      return true;  
+
       //Empty teardown
     }
 
