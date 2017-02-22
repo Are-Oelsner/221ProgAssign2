@@ -1,3 +1,5 @@
+//Names: Are Oelsner, Paul Torre
+//Testing code for map implementations
 import java.util.ArrayList;
 import java.util.function.Supplier;
 
