@@ -10,6 +10,8 @@ import java.util.Comparator;
  */
 public class SortedTableMap<K,V> extends AbstractSortedMap<K,V> {
 
+  private ArrayList<MapEntry<K,V>> table = new ArrayList<>( );
+
   /** Constructs an empty map using the natural ordering of keys. */
   public SortedTableMap() { super(); }
 
@@ -24,7 +26,7 @@ public class SortedTableMap<K,V> extends AbstractSortedMap<K,V> {
    * @return number of entries in the map
    */
   @Override
-  public int size() { return -1; }
+  public int size() { return table.size(); }
 
   /**
    * Returns the value associated with the specified key, or null if no such entry exists.
@@ -33,7 +35,10 @@ public class SortedTableMap<K,V> extends AbstractSortedMap<K,V> {
    */
   @Override
   public V get(K key) throws IllegalArgumentException {
-    return null;
+    int j = findIndex(key);
+    if(j == size() || compare(key, table.get(j)) != 0)  //no match
+      return null;
+    return table.get(j).getValue();
   }
 
   /**
@@ -47,7 +52,11 @@ public class SortedTableMap<K,V> extends AbstractSortedMap<K,V> {
    */
   @Override
   public V put(K key, V value) throws IllegalArgumentException {
-    return null;
+    int j = findIndex(key);
+    if (j < size() && compare(key, table.get(j)) == 0) //match exists
+      return table.get(j).setValue(value);
+    table.add(j, new MapEntry<K,V>(key, value)); //otherwise it is new
+    return null;  
   }
 
   /**
@@ -58,7 +67,10 @@ public class SortedTableMap<K,V> extends AbstractSortedMap<K,V> {
    */
   @Override
   public V remove(K key) throws IllegalArgumentException {
-    return null;
+    int j = findIndex(key);
+    if(j == size() || compare(key, table.get(j)) != 0)  //no match
+      return null;
+    return table.remove(j).getValue();  
   }
 
   /**
@@ -71,4 +83,22 @@ public class SortedTableMap<K,V> extends AbstractSortedMap<K,V> {
     ArrayList<Entry<K,V>> buffer = new ArrayList<>();
     return buffer;
   }
+
+  /** Returns the smallest index for range table[low..high] inclusive storing an entry with 
+  a key greater than or equal to k (or else index high+1, by convention). */
+
+  private int findIndex(K key, int low, int high) {
+    if(high < low) return high + 1;  //no entry qualifies
+    int mid = (low + high) / 2;
+    int comp = compare(key, table.get(mid));
+    if (comp == 0)
+      return mid; //found exact match
+    else if (comp < 0)
+      return findIndex(key, low, mid - 1);  //answer is left of mid
+    else
+      return findIndex(key, mid + 1, high);  //answer is right of mid
+  }
+
+  /** Version of findIndex that searches the entire table */
+  private int findIndex(K key) { return findIndex(key, 0, table.size() - 1); }
 }
