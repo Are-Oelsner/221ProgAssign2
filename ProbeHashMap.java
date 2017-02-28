@@ -1,3 +1,4 @@
+//Names: Paul Torre, Are Oelsner
 import java.util.ArrayList;
 
 /**
@@ -51,7 +52,7 @@ public class ProbeHashMap<K,V> extends AbstractHashMap<K,V> {
   @Override
   protected V bucketPut(int h, K k, V v) {
     int j = findSlot(h, k);
-    if (j >= 0) 
+    if (j >= 0)
       return table[j].setValue(v);      //this key has an existing entry
     table[-(j+1)] = new MapEntry<>(k, v);  //convert to proper index
     n++;
@@ -74,7 +75,7 @@ public class ProbeHashMap<K,V> extends AbstractHashMap<K,V> {
     n--;
     return answer;
   }
-  
+
 
   /**
    * Returns an iterable collection of all key-value entries of the map.
@@ -93,14 +94,14 @@ public class ProbeHashMap<K,V> extends AbstractHashMap<K,V> {
   }
 
   /** Returns index with key k, or −(a+1) such that k could be added at index a. */
-  private int findSlot(int h, K k) { 
-    int avail = -1;                             // no slot available (thus far) 
+  private int findSlot(int h, K k) {
+    int avail = -1;                             // no slot available (thus far)
     int j = h;                                  // index while scanning table
     do{
       if (isAvailable(j)) {                     // may be either empty or defunctable slot!
         if (avail == -1) avail = j;             // this is the first avail
         if (table[j] == null) break;            // if empty, search fails immediately
-      } else if (table[j].getKey().equals(k)) 
+      } else if (table[j].getKey().equals(k))
           return j;                             // successful match
       j = (j+1) % capacity;                     // keep looking (cyclically)
     } while (j != h);                           // stop if we return to the start

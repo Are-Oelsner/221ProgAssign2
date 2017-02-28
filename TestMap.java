@@ -146,8 +146,8 @@ public class TestMap {
 
       //Test
       int i=0;
-      for(Entry x : entry) {  //is this legal?
-        if(!entries.contains(x))
+      for(Entry x : entry) {  //is this legal? Looks good to me.
+        if(!entries.contains(x)) //Should we compare to entrie
           return false;
         i++;
       }
