@@ -49,7 +49,7 @@ public class TestMap {
       map.put(1, "A");
       map.put(2, "B");
       
-      //Execute
+      //Execute      test the replace feature
       String x = map.get(2);
 
       //Test
@@ -155,7 +155,7 @@ public class TestMap {
           return false;
         i++;
       }
-      return true;  
+      return i == 4;  
 
       //Empty teardown
     }
