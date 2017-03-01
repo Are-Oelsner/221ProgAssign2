@@ -18,13 +18,12 @@ public class TestMap {
    */
   public static <M extends Map<Integer, String>>
     boolean TestGet(Supplier<M> c) {
-      //TODO write unit test for get
       //Setup
       Map<Integer, String> map = c.get();  //what does this mean
 
       map.put(1, "A");
       map.put(2, "B");
-      
+
       //Execute
       String x = map.get(2);
 
@@ -42,14 +41,18 @@ public class TestMap {
    */
   public static <M extends Map<Integer, String>>
     boolean TestPut(Supplier<M> c) {
-      //TODO write unit test for put
       //Setup
       Map<Integer, String> map = c.get();  //what does this mean
 
       map.put(1, "A");
       map.put(2, "B");
+<<<<<<< HEAD
       
       //Execute      test the replace feature
+=======
+
+      //Execute
+>>>>>>> 0a5a6d88c4b7141d8b60a46c6ccbca3814e65030
       String x = map.get(2);
 
       //Test
@@ -65,13 +68,12 @@ public class TestMap {
    */
   public static <M extends Map<Integer, String>>
     boolean TestRemove(Supplier<M> c) {
-      //TODO write unit test for remove
       //Setup
       Map<Integer, String> map = c.get();  //what does this mean
 
       map.put(1, "A");
       map.put(2, "B");
-      
+
       //Execute
       String x = map.remove(2);
 
@@ -131,7 +133,6 @@ public class TestMap {
    */
   public static <M extends Map<Integer, String>>
     boolean TestEntrySet(Supplier<M> c) {
-      //TODO write unit test for remove
       //Setup
       Map<Integer, String> map = c.get();
 
@@ -150,12 +151,16 @@ public class TestMap {
 
       //Test
       int i=0;
-      for(Entry x : entry) {  //is this legal?
-        if(!entries.contains(x))
+      for(Entry x : entry) {  //is this legal? Looks good to me.
+        if(!entries.contains(x)) //Should we compare to entrie
           return false;
         i++;
       }
+<<<<<<< HEAD
       return i == 4;  
+=======
+      return true;
+>>>>>>> 0a5a6d88c4b7141d8b60a46c6ccbca3814e65030
 
       //Empty teardown
     }

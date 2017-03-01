@@ -11,6 +11,7 @@ import java.util.NoSuchElementException;
 public class TreeMap<K,V> extends AbstractSortedMap<K,V> {
 
   private class BinaryTree<K,V> {
+<<<<<<< HEAD
 
 
     private class Node<K,V> implements Entry<K,V> {//Need to finish converting from k,v to entry
@@ -23,10 +24,22 @@ public class TreeMap<K,V> extends AbstractSortedMap<K,V> {
 
       //Constructors for Node class
       public Node() {
+=======
+    private class Node<Entry<K,V>> extends Entry {//Need to finish converting from k,v to entry
+      //Private Variables for Node class
+      private Node parent;
+      private Node left;
+      private Node right;
+      private Entry<K,V> entry;
+
+      //Constructors for Node class
+      public Node<Entry<K,V>>() {
+>>>>>>> 0a5a6d88c4b7141d8b60a46c6ccbca3814e65030
         parent = null;
         left = null;
         right = null;
         entry = null;
+<<<<<<< HEAD
         key = null;
         value = null;
       }
@@ -38,12 +51,32 @@ public class TreeMap<K,V> extends AbstractSortedMap<K,V> {
         parent = null;
         key = k;
         value = v;
+=======
+      }
+
+      //Node copy constructor
+      public Node<K,V>(Node node) {
+        this.parent = node.parent;
+        this.left = node.left;
+        this.right = node.right;
+        this.entry = node.entry;
+      }
+
+      //Basic Node constructor
+      public Node<<Entry<K,V>>(Entry _entry) {
+        parent = null;
+        this.entry = _entry;
+>>>>>>> 0a5a6d88c4b7141d8b60a46c6ccbca3814e65030
         left = null;
         right = null;
       }
 
       //Complex Node constructor
+<<<<<<< HEAD
       public Node (Node<K,V> _parent, Node<K,V> _left, Node<K,V> _right, Node<K,V> _entry) {
+=======
+      public Node<K,V>(Node _parent, Node _left, Node _right, Entry _entry) {
+>>>>>>> 0a5a6d88c4b7141d8b60a46c6ccbca3814e65030
         parent = _parent;
         left = _left;
         right = _right;
@@ -51,14 +84,21 @@ public class TreeMap<K,V> extends AbstractSortedMap<K,V> {
       }
 
       //Accessor Methods
+<<<<<<< HEAD
       public Node<K,V> getParent() {return parent;}
       public Node<K,V> getLeft() {return left;}
       public Node<K,V> getRight() {return right;}
+=======
+      public Node getParent() {return parent;}
+      public Node getLeft() {return left;}
+      public Node getRight() {return right;}
+>>>>>>> 0a5a6d88c4b7141d8b60a46c6ccbca3814e65030
 
       public K getK() {return entry.getKey();}
       public V getV() {return entry.getValue();}
 
       //Setter Methods
+<<<<<<< HEAD
       public void setParent(Node<K,V> _parent) {parent = _parent;}
       public void setLeft(Node<K,V> _left) {left = _left;}
       public void setRight(Node<K,V> _right) {right = _right;}
@@ -67,29 +107,56 @@ public class TreeMap<K,V> extends AbstractSortedMap<K,V> {
       public void setK(K _k) {key = _k;}
       public void setV(V _v) {value = _v;}
 
+=======
+      public void setParent(Node _parent) {parent = _parent;}
+      public void setLeft(Node _left) {left = _left;}
+      public void setRight(Node _right) {right = _right;}
+
+      /* Not sure if we need these
+       * public void setK(K _k) {k = _k;}
+       * public void setV(V _v) {v = _v;}
+       */
+>>>>>>> 0a5a6d88c4b7141d8b60a46c6ccbca3814e65030
     }
 
 
     //BinaryTree class
     //Private Variables
+<<<<<<< HEAD
     private Node<K,V> root;
     private int size;
 
     //Constructors for BinaryTree class
     public BinaryTree () {
+=======
+    private Node<Entry<K,V>> root;
+    private int size;
+
+    //Constructors for BinaryTree class
+    public BinaryTree<Node<Entry<K,V>>>/*generics*/() {
+>>>>>>> 0a5a6d88c4b7141d8b60a46c6ccbca3814e65030
       root = null;
       size = 0;
     }
 
     //BinaryTree class methods
     //Insert function: Inserts a key value pair into the binary search tree
+<<<<<<< HEAD
     public void insert(Entry<K,V> e) {//I wasn't sure how we would pass key-value pairs
       Node<Entry<K,V>> ins = new Node<Entry<K,V>>(e); // As entries or as k and v separately
+=======
+    public void insert(K k, V v) {//I wasn't sure how we would pass key-value pairs
+      Node<> ins = new Node<>(k,v); // As entries or as k and v separately
+>>>>>>> 0a5a6d88c4b7141d8b60a46c6ccbca3814e65030
       insertHelper(ins, root);
     }
 
     //Recursive helper function for Node insertion
+<<<<<<< HEAD
     private void insertHelper(Node<Entry<K,V>> ins, Node<Entry<K,V>> node) {
+=======
+    private void insertHelper(Node ins, Node node) {
+>>>>>>> 0a5a6d88c4b7141d8b60a46c6ccbca3814e65030
       if(node == null) {
         node = ins;
         size++;
@@ -103,11 +170,19 @@ public class TreeMap<K,V> extends AbstractSortedMap<K,V> {
     }
 
     //Find function: finds a node in the tree with value n
+<<<<<<< HEAD
     public Node<Entry<K,V>> find(K k) {
       return findHelper(k, root);
     }
     //Recursive helper function for finding Nodes
     private Node<Entry<K,V>> findHelper(K k, Node<Entry<K,V>> node) {//iffy generics
+=======
+    public Node<K,V> find(K k) {
+      return findHelper(k, root);
+
+    //Recursive helper function for finding Nodes
+    private Node<> findHelper(K k, Node node) {//iffy generics
+>>>>>>> 0a5a6d88c4b7141d8b60a46c6ccbca3814e65030
       if(node.getK() == k) {//Need to use comparator?
         return node;
       }
@@ -121,10 +196,17 @@ public class TreeMap<K,V> extends AbstractSortedMap<K,V> {
 
     //Delete Function
     public Node<Entry<K,V>> delete(K k) {
+<<<<<<< HEAD
       Node<Entry<K,V>> node = find(k);
       Node<Entry<K,V>> left = node.getLeft();
       Node<Entry<K,V>> right = node.getRight();
       Node<Entry<K,V>> ans = new Node<Entry<K,V>>(node);
+=======
+      Node node = find(k);
+      Node left = node.getLeft();
+      Node right = node.getRight();
+      Node ans = new Node(node);
+>>>>>>> 0a5a6d88c4b7141d8b60a46c6ccbca3814e65030
       left.setParent(node.getParent());
       if(node.isLeft()) {
         node.getParent().setLeft(node.getLeft());
@@ -136,7 +218,11 @@ public class TreeMap<K,V> extends AbstractSortedMap<K,V> {
         left.setRight(right);
       }
       else{
+<<<<<<< HEAD
         Node<Entry<K,V>> temp = left.getRight();
+=======
+        Node temp = left.getRight();
+>>>>>>> 0a5a6d88c4b7141d8b60a46c6ccbca3814e65030
         while(temp.getRight() != null) {
           temp = temp.getRight();
         }
@@ -144,8 +230,15 @@ public class TreeMap<K,V> extends AbstractSortedMap<K,V> {
       }
       size--;
     }
+<<<<<<< HEAD
   }
 
+=======
+
+
+
+  }
+>>>>>>> 0a5a6d88c4b7141d8b60a46c6ccbca3814e65030
 /*Do we create a Binary Tree as a private variable?
  *
  *protected BalanceableBinaryTree<K,V> tree = new BalanceableBinaryTree<>();
