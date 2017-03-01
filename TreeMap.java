@@ -11,48 +11,43 @@ import java.util.NoSuchElementException;
 public class TreeMap<K,V> extends AbstractSortedMap<K,V> {
 
   private class BinaryTree<K,V> {
-    private class Node<K,V> {
+    private class Node<Entry<K,V>> extends Entry {//Need to finish converting from k,v to entry
       //Private Variables for Node class
       private Node parent;
       private Node left;
       private Node right;
-      private K k;
-      private V v;
+      private Entry<K,V> entry;
 
       //Constructors for Node class
-      public Node<K,V>() {
+      public Node<Entry<K,V>>() {
         parent = null;
         left = null;
         right = null;
-        k = null;
-        v = null;
+        entry = null;
       }
 
-      //Node constructor from another node
+      //Node copy constructor
       public Node<K,V>(Node node) {
         this.parent = node.parent;
         this.left = node.left;
         this.right = node.right;
-        this.k = node.k;
-        this.v = node.v;
+        this.entry = node.entry;
       }
 
       //Basic Node constructor
-      public Node<K,V>(K _k, V _v) {
+      public Node<<Entry<K,V>>(Entry _entry) {
         parent = null;
-        k = _k;
-        v = _v;
+        this.entry = _entry;
         left = null;
         right = null;
       }
 
       //Complex Node constructor
-      public Node<K,V>(Node _parent, Node _left, Node _right, K _k, V _v) {
+      public Node<K,V>(Node _parent, Node _left, Node _right, Entry _entry) {
         parent = _parent;
         left = _left;
         right = _right;
-        k = _k;
-        v = _v;
+        entry = _entry;
       }
 
       //Accessor Methods
@@ -60,27 +55,30 @@ public class TreeMap<K,V> extends AbstractSortedMap<K,V> {
       public Node getLeft() {return left;}
       public Node getRight() {return right;}
 
-      public K getK() {return k;}
-      public V getV() {return v;}
+      public K getK() {return entry.getKey();}
+      public V getV() {return entry.getValue();}
 
       //Setter Methods
       public void setParent(Node _parent) {parent = _parent;}
       public void setLeft(Node _left) {left = _left;}
       public void setRight(Node _right) {right = _right;}
 
-      public void setK(K _k) {k = _k;}
-      public void setV(V _v) {v = _v;}
+      /* Not sure if we need these
+       * public void setK(K _k) {k = _k;}
+       * public void setV(V _v) {v = _v;}
+       */
     }
 
 
     //BinaryTree class
     //Private Variables
-    private Node<K,V> root;
+    private Node<Entry<K,V>> root;
     private int size;
 
     //Constructors for BinaryTree class
-    public BinaryTree/*generics*/() {
+    public BinaryTree<Node<Entry<K,V>>>/*generics*/() {
       root = null;
+      size = 0;
     }
 
     //BinaryTree class methods
@@ -122,7 +120,7 @@ public class TreeMap<K,V> extends AbstractSortedMap<K,V> {
     }
 
     //Delete Function
-    public Node<> delete(K k) {
+    public Node<Entry<K,V>> delete(K k) {
       Node node = find(k);
       Node left = node.getLeft();
       Node right = node.getRight();
